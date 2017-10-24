@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --recursive"
   },
   "repository": {
     "type": "git",
@@ -22,5 +22,9 @@
     "express": "^4.15.4",
     "json-stringify": "^1.0.0",
     "request": "^2.83.0"
+  },
+  "devDependencies": {
+    "mocha": "^4.0.1",
+    "should": "^13.1.2"
   }
 }
