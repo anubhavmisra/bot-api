@@ -2,10 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 
 var actionresolver = require('./app/actionresolver');
-
-//TODO: find actions dynamically
-var search = require('./app/actions/search');
-var select = require('./app/actions/select');
+var actionfactory = require('./app/actionfactory');
 
 var app = express();
 app.use(bodyParser.json());       // to support JSON-encoded bodies
@@ -20,13 +17,9 @@ app.post('/api/order', function(req, res) {
   console.log(req.body);
 
   //switch up logic based on "action" parameter
-  var action = actionresolver.resolveAction(req);
-  if(action === 'MultipleResults-selectnumber'){
-    select.handleSelectNumber(req, res);
-  } else {
-    //Searching for a product is the default behaviour
-    search.handleProductSearch(req, res);
-  }
+  var actionName = actionresolver.resolveAction(req);
+  var action = actionfactory.getAction(actionName);
+  action.op(req, res);
 });
 
 app.listen(process.env.PORT || 3001);
