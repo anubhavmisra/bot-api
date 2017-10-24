@@ -45,4 +45,4 @@ class SearchAction{
 }
 
 
-module.exports.SearchAction = SearchAction;
+module.exports = SearchAction;

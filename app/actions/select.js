@@ -33,4 +33,4 @@ class SelectAction{
   }
 }
 
-module.exports.SelectAction = SelectAction;
+module.exports = SelectAction;
