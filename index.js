@@ -18,7 +18,8 @@ app.post('/api/order', function(req, res) {
 
   //switch up logic based on "action" parameter
   var actionName = actionresolver.resolveAction(req);
-  var action = actionfactory.getAction(actionName);
+  var action = actionfactory.actionFactory[actionName];
+
   action.op(req, res);
 });
 

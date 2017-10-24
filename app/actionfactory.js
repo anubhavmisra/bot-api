@@ -1,14 +1,9 @@
 var search = require('./actions/search');
 var select = require('./actions/select');
 
-function getAction(actionName){
-  // return action object
-  if(actionName === 'MultipleResults-selectnumber'){
-    return new select.SelectAction();
-  } else {
-    return new search.SearchAction();
-  }
-
+var actionFactory = {
+  'search': new search.SearchAction(),
+  'select': new select.SelectAction()
 }
 
-module.exports.getAction = getAction;
+module.exports.actionFactory = actionFactory;
