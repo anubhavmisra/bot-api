@@ -6,4 +6,4 @@ var actionFactory = {
   'select': new select.SelectAction()
 }
 
-module.exports.actionFactory = actionFactory;
+module.exports = actionFactory;

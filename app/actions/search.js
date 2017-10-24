@@ -4,7 +4,7 @@ var mb = require('../lib/milkbasket');
 class SearchAction{
   op(req, res){
     var product = req.body.result.parameters['product'];
-    
+
     // Call the search api
     mb.callSearch(product).then((output) => {
       if(output.data.length > 1){
@@ -42,7 +42,6 @@ class SearchAction{
       res.send(JSON.stringify({ 'speech': error, 'displayText': error }));
     });
   }
-
 }
 
 
