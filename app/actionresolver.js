@@ -2,7 +2,12 @@
 
 function resolveAction(req){
   // Retrieve action name from request
-  return req.body.result.action;
+  var actionName = req.body.result.action;
+  if(actionName === 'MultipleResults-selectnumber'){
+    return 'select';
+  } else {
+    return 'search';
+  }
 }
 
 module.exports.resolveAction = resolveAction;
