@@ -15,7 +15,9 @@ class SelectAction{
         //"speech" is the spoken version of the response, "displayText" is the visual version
         //Default response: show added product name
         var response = 'I have added \'' + output.data[0].nm + '\' to your basket(Not really).';
-        var responseJson = stringify({ "speech": response, "displayText": response});
+        var responseJson = stringify({ "speech": response, "displayText": response, "data": {
+           "product":selectedProduct
+        }});
       } else {
         //FIXME We do not like this case. The product should be found by the select
         var response = 'There are an unexpected number of results for ' + selectedProduct + '.';
