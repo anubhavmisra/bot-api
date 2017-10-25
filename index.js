@@ -14,7 +14,7 @@ app.post('/api/order', function(req, res) {
   //FIXME: user authentication
   //FIXME: who can access this app? How do we limit this?
 
-  console.log(req.body);
+  console.log(JSON.stringify(req.body,null,2));
 
   //switch up logic based on "action" parameter
   var actionName = actionresolver.resolveAction(req);
