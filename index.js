@@ -29,7 +29,15 @@ app.post('/api/order', function(req, res) {
   var actionName = actionresolver.resolveAction(req);
   var action = actionfactory[actionName];
 
-  action.op(req, res);
+  action.op(req, res).then((responseJson)  => {
+    res.setHeader('Content-Type', 'application/json');
+    //TODO: maybe better to stringify here?
+    res.send(responseJson);
+  }).catch((error) => {
+    //Let the user know if an error occurred
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify({ 'speech': error, 'displayText': error }));
+  });
 });
 
 app.listen(process.env.PORT || 3001);
