@@ -8,7 +8,7 @@ class ShowMoreQuantityAction{
             var response = 'I have found multiple quantities.';
             //"followupEvent" to send the user to the next step
             var quantities = req.body.result.parameters.morequantities;
-            quantities = quantities.concat(req.body.result.parameters.quantities)
+            quantities = quantities.concat(req.body.result.parameters.quantities);
 
             var responseJson = stringify({ "speech": response, "displayText": response, "followupEvent": {
                 "name": "product_multiple_quantities",

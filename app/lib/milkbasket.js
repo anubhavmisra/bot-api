@@ -1,5 +1,6 @@
 var request = require('request');
 
+//TODO: this should be called with query, brand, quantity (Or possibly just search params)
 function callSearch(query){
   return new Promise((resolve, reject) => {
     var options =  {
@@ -9,7 +10,7 @@ function callSearch(query){
         headers: {
             'Content-Type': 'application/json'
         }
-    }
+    };
     request(options, function (error, response) {
       if (!error && response.statusCode == 200) {
         resolve(JSON.parse(response.body));
