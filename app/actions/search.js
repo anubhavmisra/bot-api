@@ -10,18 +10,17 @@ class SearchAction{
       mb.callSearch(product).then((output) => {
         var responseJson = '';
         if(output.data.length > 1){
-          var response = 'I have found multiple products.';
-          var productNames = output.data.map(function(product, index, array){
-            return (index + 1) + '. ' +  product.nm;
-          });
+          //TODO: brand selection result
 
-          //"followupEvent" to send the user to the next step
-          responseJson = stringify({ "speech": response, "displayText": response, "followupEvent": {
-            "name": "product_multiple_results",
-            "data": {
-               "products":productNames.slice(0,3)
-            }
-          }});
+          //quantity selection result
+          var quantaties = getQuantaties(output); 
+          console.log("Found " + quantaties.length + " quantaties");
+          if (quantaties.length > 1){
+            responseJson = getQuantatiesResponse(quantaties);
+          } else {
+            //send a regular 'multiple results' response
+            responseJson = getMultipleResultsResponse(output);
+          }
         } else if (output.data.length == 1){
           //TODO: add this product to the basket
 
@@ -42,6 +41,55 @@ class SearchAction{
       });
     });
   }
+}
+
+function getQuantaties(output) {
+  var quantaties = output.data.map(function(product, index, array){
+    return product.wgt;
+  });
+  //remove duplicates
+  return uniq(quantaties);
+}
+
+function uniq(a) {
+  var seen = {};
+  return a.filter(function(item) {
+      return seen.hasOwnProperty(item) ? false : (seen[item] = true);
+  });
+}
+
+function getQuantatiesResponse(quantaties){
+  var response = 'I have found multiple quantaties.';
+  //"followupEvent" to send the user to the next step
+  var more = '';
+  if(quantaties.length > 3){
+    more = 'more';
+  }
+  responseJson = stringify({ "speech": response, "displayText": response, "followupEvent": {
+    "name": "product_multiple_quantaties",
+    "data": {
+      "quantaties":quantaties.slice(0,3),
+      "moreresults":more
+    }
+  }});
+  return responseJson;
+  
+}
+
+function getMultipleResultsResponse(output){
+  var response = 'I have found multiple products.';
+  var productNames = output.data.map(function(product, index, array){
+    return (index + 1) + '. ' +  product.nm;
+  });
+
+  //"followupEvent" to send the user to the next step
+  responseJson = stringify({ "speech": response, "displayText": response, "followupEvent": {
+    "name": "product_multiple_results",
+    "data": {
+      "products":productNames.slice(0,3)
+    }
+  }});
+  return responseJson;
 }
 
 module.exports = SearchAction;
