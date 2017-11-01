@@ -5,8 +5,10 @@ function resolveAction(req){
   var actionName = req.body.result.action;
   if(actionName === 'MultipleResults-selectnumber'){
     return 'select';
-  }if(actionName === 'basket.get'){
+  } else if(actionName === 'basket.get'){
     return 'showbasket';
+  } else if(actionName === 'OrderIntent-MultipleQuantities.OrderIntent-MultipleQuantities-more'){
+    return 'showmorequantities';
   }
   else {
     return 'search';
