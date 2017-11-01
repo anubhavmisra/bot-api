@@ -22,7 +22,6 @@ app.post('/api/order', function(req, res) {
     }
   }
 
-
   console.log(JSON.stringify(req.body,null,2));
 
   //switch up logic based on "action" parameter
