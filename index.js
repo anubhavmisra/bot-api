@@ -14,14 +14,6 @@ app.post('/api/order', function(req, res) {
   //FIXME: user authentication
   //FIXME: who can access this app? How do we limit this?
 
-  //What is the source of this request?
-  if(req.body.hasOwnProperty('originalRequest')){
-    if(req.body.originalRequest.source === 'facebook'){
-      var fbid = req.body.originalRequest.data.sender.id;
-      console.log('facebook request from user ' + fbid);
-    }
-  }
-
   console.log(JSON.stringify(req.body,null,2));
 
   //switch up logic based on "action" parameter
