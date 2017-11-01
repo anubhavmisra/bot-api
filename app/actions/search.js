@@ -62,14 +62,17 @@ function getQuantitiesResponse(quantities){
   var response = 'I have found multiple quantities.';
   //"followupEvent" to send the user to the next step
   var more = '';
+  var morequantities = [];
   if(quantities.length > 3){
     more = 'more';
+    morequantities = quantities.slice(3);
   }
   responseJson = stringify({ "speech": response, "displayText": response, "followupEvent": {
     "name": "product_multiple_quantities",
     "data": {
       "quantities":quantities.slice(0,3),
-      "moreresults":more
+      "moreresults":more,
+      "morequantities":morequantities
     }
   }});
   return responseJson;
