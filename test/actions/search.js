@@ -1,5 +1,5 @@
 var assert = require('should');
-var search = require('../../app/actions/search')
+var search = require('../../app/actions/search');
 describe('search', function () {
   it('should return no search items', function () {
     //FIXME: Assert that the search results are valid
