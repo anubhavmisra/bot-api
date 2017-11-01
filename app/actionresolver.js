@@ -9,6 +9,8 @@ function resolveAction(req){
     return 'showbasket';
   } else if(actionName === 'OrderIntent-MultipleQuantities.OrderIntent-MultipleQuantities-more'){
     return 'showmorequantities';
+  } else if(actionName === 'OrderIntent-MultipleQuantities-select'){
+    return 'selectquantity';
   }
   else {
     return 'search';
