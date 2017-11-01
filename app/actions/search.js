@@ -13,10 +13,10 @@ class SearchAction{
           //TODO: brand selection result
 
           //quantity selection result
-          var quantaties = getQuantaties(output); 
-          console.log("Found " + quantaties.length + " quantaties");
-          if (quantaties.length > 1){
-            responseJson = getQuantatiesResponse(quantaties);
+          var quantities = getquantities(output); 
+          console.log("Found " + quantities.length + " quantities");
+          if (quantities.length > 1){
+            responseJson = getQuantitiesResponse(quantities);
           } else {
             //send a regular 'multiple results' response
             responseJson = getMultipleResultsResponse(output);
@@ -43,12 +43,12 @@ class SearchAction{
   }
 }
 
-function getQuantaties(output) {
-  var quantaties = output.data.map(function(product, index, array){
+function getquantities(output) {
+  var quantities = output.data.map(function(product, index, array){
     return product.wgt;
   });
   //remove duplicates
-  return uniq(quantaties);
+  return uniq(quantities);
 }
 
 function uniq(a) {
@@ -58,17 +58,17 @@ function uniq(a) {
   });
 }
 
-function getQuantatiesResponse(quantaties){
-  var response = 'I have found multiple quantaties.';
+function getQuantitiesResponse(quantities){
+  var response = 'I have found multiple quantities.';
   //"followupEvent" to send the user to the next step
   var more = '';
-  if(quantaties.length > 3){
+  if(quantities.length > 3){
     more = 'more';
   }
   responseJson = stringify({ "speech": response, "displayText": response, "followupEvent": {
-    "name": "product_multiple_quantaties",
+    "name": "product_multiple_quantities",
     "data": {
-      "quantaties":quantaties.slice(0,3),
+      "quantities":quantities.slice(0,3),
       "moreresults":more
     }
   }});
