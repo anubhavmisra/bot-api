@@ -11,18 +11,18 @@ class SelectAction{
       // Call the search api
       mb.callSearch(selectedProduct).then((output) => {
         var responseJson = '';
-        if (output.data.length == 1){
+        if (output.data.length == 1){ //Null check and ===
           //TODO: add this product to the basket
 
           //"speech" is the spoken version of the response, "displayText" is the visual version
           //Default response: show added product name
-          var response = 'I have added \'' + output.data[0].nm + '\' to your basket(Not really).';
+          var response = 'I have added \'' + output.data[0].nm + '\' to your basket(Not really).'; // Template literal
           responseJson = stringify({ "speech": response, "displayText": response,
             "contextOut": [{"name":"orderintent-followup", "lifespan":5, "parameters":{"product": selectedProduct}}]
           });
         } else {
           //FIXME We do not like this case. The product should be found by the select
-          var response = 'There are an unexpected number of results for ' + selectedProduct + '.';
+          var response = 'There are an unexpected number of results for ' + selectedProduct + '.'; // Template literal
           responseJson = stringify({ "speech": response, "displayText": response});
         }
         resolve(responseJson);

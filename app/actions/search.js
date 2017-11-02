@@ -1,10 +1,11 @@
+//Change all var declarations to let
 var stringify = require('json-stringify');
 var mb = require('../lib/milkbasket');
 
 class SearchAction{
   op(req, res){
     return new Promise((resolve, reject) => {
-      var product = req.body.result.parameters.product;
+      var product = req.body.result.parameters.product; //Null check missing
 
       // Call the search api
       mb.callSearch(product).then((output) => {
@@ -21,16 +22,16 @@ class SearchAction{
             //send a regular 'multiple results' response
             responseJson = getMultipleResultsResponse(output);
           }
-        } else if (output.data.length == 1){
+        } else if (output.data.length == 1){ //Null check missing and ===
           //TODO: add this product to the basket
 
           //"speech" is the spoken version of the response, "displayText" is the visual version
           //Default response: show added product name
-          var response = 'I have added \'' + output.data[0].nm + '\' to your basket(Not really).';
+          var response = 'I have added \'' + output.data[0].nm + '\' to your basket(Not really).'; // You can use template literals here. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals 
           responseJson = stringify({ "speech": response, "displayText": response});
         } else if (output.data.length < 1){
           //Default response: no results
-          var response = 'I could not find any results for ' + product + '.';
+          var response = 'I could not find any results for ' + product + '.'; // Template literals
           responseJson = stringify({ "speech": response, "displayText": response});
         }
 
@@ -54,7 +55,7 @@ function getquantities(output) {
 function uniq(a) {
   var seen = {};
   return a.filter(function(item) {
-      return seen.hasOwnProperty(item) ? false : (seen[item] = true);
+      return seen.hasOwnProperty(item) ? false : (seen[item] = true); //hasOwnProperty check is unnecessary. Simple !!seen[item] should work
   });
 }
 
@@ -81,7 +82,7 @@ function getQuantitiesResponse(quantities){
 
 function getMultipleResultsResponse(output){
   var response = 'I have found multiple products.';
-  var productNames = output.data.map(function(product, index, array){
+  var productNames = output.data.map(function(product, index, array){ //Null check on output
     return (index + 1) + '. ' +  product.nm;
   });
 
