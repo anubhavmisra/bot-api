@@ -1,3 +1,4 @@
+//Change all var declarations to let
 var stringify = require('json-stringify');
 var utils = require('../lib/requestutils');
 var mb = require('../lib/milkbasket');
