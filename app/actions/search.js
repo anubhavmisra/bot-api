@@ -28,15 +28,15 @@ class SearchAction{
 
             //"speech" is the spoken version of the response, "displayText" is the visual version
             //Default response: show added product name
-            let response = 'I have added \'' + output.data[0].nm + '\' to your basket(Not really).';
+            let response = `I have added \'${output.data[0].nm}\' to your basket(Not really).`;
             responseJson = stringify({ "speech": response, "displayText": response});
           } else if (output.data.length < 1){
             //Default response: no results
-            let response = 'I could not find any results for ' + product + '.';
+            let response = `I could not find any results for ${product}.`;
             responseJson = stringify({ "speech": response, "displayText": response});
           }
         } else {
-          let response = 'I could not find any results for ' + product + '.';
+          let response = `I could not find any results for ${product}.`;
           responseJson = stringify({ "speech": response, "displayText": response});
         }
 

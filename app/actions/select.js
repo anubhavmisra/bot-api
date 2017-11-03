@@ -20,18 +20,18 @@ class SelectAction{
 
             //"speech" is the spoken version of the response, "displayText" is the visual version
             //Default response: show added product name
-            let response = 'I have added \'' + output.data[0].nm + '\' to your basket(Not really).';
+            let response = `I have added \'${output.data[0].nm}\' to your basket(Not really).`;
             responseJson = stringify({ "speech": response, "displayText": response,
               "contextOut": [{"name":"orderintent-followup", "lifespan":5, "parameters":{"product": selectedProduct}}]
             });
           } else {
             //FIXME We do not like this case. The product should be found by the select
-            let response = 'There are an unexpected number of results for ' + selectedProduct + '.';
+            let response = `There are an unexpected number of results for ${selectedProduct}.`;
             responseJson = stringify({ "speech": response, "displayText": response});
           }
         } else{
           //FIXME We do not like this case. The product should be found by the select
-          let response = 'There are an unexpected number of results for ' + selectedProduct + '.';
+          let response = `There are an unexpected number of results for ${selectedProduct}.`;
           responseJson = stringify({ "speech": response, "displayText": response});
         }
         resolve(responseJson);
