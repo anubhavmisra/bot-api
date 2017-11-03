@@ -4,7 +4,7 @@ let request = require('request');
 function callSearch(query){
   return new Promise((resolve, reject) => {
     var options =  {
-        uri: 'http://milkbasket.com/products/search',
+        uri: 'http://dev.milkbasket.com/products/search',
         body: JSON.stringify({"search_text": query}),
         method: 'POST',
         headers: {
