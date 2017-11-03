@@ -1,10 +1,10 @@
-var express = require('express');
-var bodyParser = require('body-parser');
+let express = require('express');
+let bodyParser = require('body-parser');
 
-var actionresolver = require('./app/actionresolver');
-var actionfactory = require('./app/actionfactory');
+let actionresolver = require('./app/actionresolver');
+let actionfactory = require('./app/actionfactory');
 
-var app = express();
+let app = express();
 app.use(bodyParser.json());       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
@@ -17,8 +17,8 @@ app.post('/api/order', function(req, res) {
   console.log(JSON.stringify(req.body,null,2));
 
   //switch up logic based on "action" parameter
-  var actionName = actionresolver.resolveAction(req);
-  var action = actionfactory[actionName];
+  let actionName = actionresolver.resolveAction(req);
+  let action = actionfactory[actionName];
 
   action.op(req, res).then((responseJson)  => {
     res.setHeader('Content-Type', 'application/json');

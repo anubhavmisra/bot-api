@@ -1,16 +1,16 @@
-var stringify = require('json-stringify');
-var mb = require('../lib/milkbasket');
+let stringify = require('json-stringify');
+let mb = require('../lib/milkbasket');
 
 class SelectQuantityAction{
     op(req, res){
         return new Promise((resolve, reject) => {
-            var selectedQuantity =  req.body.result.parameters.selectedQuantity;
-            var product = req.body.result.parameters.product;
-            var brand;
+            let selectedQuantity =  req.body.result.parameters.selectedQuantity;
+            let product = req.body.result.parameters.product;
+            let brand;
 
             //TODO: call MB search with product, brand, quantity
 
-            var response = 'Cannot search with params yet.';
+            let response = 'Cannot search with params yet.';
             responseJson = stringify({ "speech": response, "displayText": response,
               "contextOut": [{"name":"orderintent-followup", "lifespan":5, "parameters":{"product": product}}]
             });

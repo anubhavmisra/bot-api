@@ -1,11 +1,11 @@
-var search = require('./actions/search');
-var select = require('./actions/select');
-var showbasket = require('./actions/showbasket');
-var checkexternalid = require('./actions/checkexternalid');
-var showmorequantities = require('./actions/showmorequantities');
-var selectquantity = require('./actions/selectquantity');
+let search = require('./actions/search');
+let select = require('./actions/select');
+let showbasket = require('./actions/showbasket');
+let checkexternalid = require('./actions/checkexternalid');
+let showmorequantities = require('./actions/showmorequantities');
+let selectquantity = require('./actions/selectquantity');
 
-var actionFactory = {
+let actionFactory = {
   'search': new search(),
   'select': new select(),
   'showbasket': new showbasket(),

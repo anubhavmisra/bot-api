@@ -1,6 +1,6 @@
-var stringify = require('json-stringify');
-var utils = require('../lib/requestutils');
-var mb = require('../lib/milkbasket');
+let stringify = require('json-stringify');
+let utils = require('../lib/requestutils');
+let mb = require('../lib/milkbasket');
 
 class ShowBasketAction{
     op(req, res){

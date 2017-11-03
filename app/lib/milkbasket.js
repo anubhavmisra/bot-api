@@ -1,4 +1,4 @@
-var request = require('request');
+let request = require('request');
 
 //TODO: this should be called with query, brand, quantity (Or possibly just search params)
 function callSearch(query){
