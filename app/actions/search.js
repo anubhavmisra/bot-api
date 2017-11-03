@@ -55,15 +55,14 @@ class SearchAction{
 
 function getbrands(output) {
   if(typeof output.data !== 'undefined' && output.data !== null){
-    let quantities = output.data.map(function(product, index, array){
+    let brands = output.data.map(function(product, index, array){
       //TODO: we do not have brands yet
-      return product.category;
+      return product.brand_name;
     });
     //remove duplicates
-    return uniq(quantities);
+    return uniq(brands);
   }
 }
-
 
 function getquantities(output) {
   if(typeof output.data !== 'undefined' && output.data !== null){
@@ -95,9 +94,9 @@ function getBrandsResponse(brands){
   responseJson = stringify({ "speech": response, "displayText": response, "followupEvent": {
     "name": "product_multiple_brands",
     "data": {
-      "quantities":brands.slice(0,3),
+      "brands":brands.slice(0,3),
       "moreresults":more,
-      "morequantities":morebrands
+      "morebrands":morebrands
     }
   }});
   return responseJson;
