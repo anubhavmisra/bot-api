@@ -1,7 +1,9 @@
 const SELECT_MULTIRESULT = 'MultipleResults-selectnumber';
 const GET_BASKET = 'basket.get';
-const SHOW_MORE_QUANTITIES = 'OrderIntent-MultipleQuantities.OrderIntent-MultipleQuantities-more';
+const SHOW_MORE_QUANTITIES = 'OrderIntent-MultipleQuantities-more';
+const SHOW_MORE_BRANDS = 'OrderIntent-MultipleBrands-more';
 const SELECT_QUANTITY = 'OrderIntent-MultipleQuantities-select';
+const SELECT_BRAND = 'OrderIntent-MultipleBrands-select';
 
 function resolveAction(req){
   //Check result is defined
@@ -16,7 +18,11 @@ function resolveAction(req){
       return 'showmorequantities';
     } else if(actionName === SELECT_QUANTITY){
       return 'selectquantity';
-    }else {
+    } else if(actionName === SHOW_MORE_BRANDS){
+      return 'showmorebrands';
+    } else if(actionName === SELECT_BRAND){
+      return 'selectbrand';
+    } else {
       //Default action is searching for product
       return 'search';
     }

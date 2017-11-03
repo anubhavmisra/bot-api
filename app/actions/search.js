@@ -13,15 +13,19 @@ class SearchAction{
         if(typeof output.data !== 'undefined' && output.data !== null){
           if(output.data.length > 1){
             //TODO: brand selection result
-
-            //quantity selection result
-            let quantities = getquantities(output); 
-            console.log("Found " + quantities.length + " quantities");
-            if (quantities.length > 1){
-              responseJson = getQuantitiesResponse(quantities);
+            let brands = getbrands(output);
+            if(brands.length > 1){
+              responseJson = getBrandsResponse(brands);
             } else {
-              //send a regular 'multiple results' response
-              responseJson = getMultipleResultsResponse(output);
+              //quantity selection result
+              let quantities = getquantities(output); 
+              console.log("Found " + quantities.length + " quantities");
+              if (quantities.length > 1){
+                responseJson = getQuantitiesResponse(quantities);
+              } else {
+                //send a regular 'multiple results' response
+                responseJson = getMultipleResultsResponse(output);
+              }
             }
           } else if (output.data.length === 1){
             //TODO: add this product to the basket
@@ -49,6 +53,18 @@ class SearchAction{
   }
 }
 
+function getbrands(output) {
+  if(typeof output.data !== 'undefined' && output.data !== null){
+    let quantities = output.data.map(function(product, index, array){
+      //TODO: we do not have brands yet
+      return product.category;
+    });
+    //remove duplicates
+    return uniq(quantities);
+  }
+}
+
+
 function getquantities(output) {
   if(typeof output.data !== 'undefined' && output.data !== null){
     let quantities = output.data.map(function(product, index, array){
@@ -64,6 +80,27 @@ function uniq(a) {
   return a.filter(function(item) {
       return seen.hasOwnProperty(item) ? false : (seen[item] = true);
   });
+}
+
+function getBrandsResponse(brands){
+  let response = 'I have found multiple brands.';
+  let more = '';
+  let morebrands = [];
+  if(brands.length > 3){
+    more = 'more';
+    morebrands = brands.slice(3);
+  }
+
+  //"followupEvent" to send the user to the next step
+  responseJson = stringify({ "speech": response, "displayText": response, "followupEvent": {
+    "name": "product_multiple_brands",
+    "data": {
+      "quantities":brands.slice(0,3),
+      "moreresults":more,
+      "morequantities":morebrands
+    }
+  }});
+  return responseJson;
 }
 
 function getQuantitiesResponse(quantities){
@@ -84,8 +121,7 @@ function getQuantitiesResponse(quantities){
       "morequantities":morequantities
     }
   }});
-  return responseJson;
-  
+  return responseJson;  
 }
 
 function getMultipleResultsResponse(output){
