@@ -1,11 +1,12 @@
 let stringify = require('json-stringify');
 let mb = require('../lib/milkbasket');
+let utils = require('../lib/requestutils');
 
 class SelectQuantityAction{
     op(req, res){
         return new Promise((resolve, reject) => {
-            let selectedQuantity =  req.body.result.parameters.selectedQuantity;
-            let product = req.body.result.parameters.product;
+            let selectedQuantity =  utils.getparameter(req, 'selectedQuantity');
+            let product = utils.getparameter(req, 'product');
             let brand;
 
             //TODO: call MB search with product, brand, quantity

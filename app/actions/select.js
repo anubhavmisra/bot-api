@@ -1,10 +1,13 @@
 let stringify = require('json-stringify');
 let mb = require('../lib/milkbasket');
+let utils = require('../lib/requestutils');
 
 class SelectAction{
   op(req, res){
     return new Promise((resolve, reject) => {
-      let selectedNumber =  req.body.result.parameters.selectedNumber;
+      let selectedNumber =  utils.getparameter(req, 'selectedNumber');
+      
+      //TODO: this should not be in the contexts but in the parameters
       let products = req.body.result.contexts[0].parameters.products;
       let selectedProduct = products[selectedNumber - 1].slice(3);
 

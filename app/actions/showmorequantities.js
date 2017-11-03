@@ -7,8 +7,9 @@ class ShowMoreQuantityAction{
             
             let response = 'I have found multiple quantities.';
             //"followupEvent" to send the user to the next step
-            let quantities = req.body.result.parameters.morequantities;
-            quantities = quantities.concat(req.body.result.parameters.quantities);
+            
+            let quantities = utils.getparameter(req, 'morequantities');
+            quantities = quantities.concat(utils.getparameter(req, 'quantities'));
 
             let responseJson = stringify({ "speech": response, "displayText": response, "followupEvent": {
                 "name": "product_multiple_quantities",
