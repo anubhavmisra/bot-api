@@ -5,14 +5,12 @@ let utils = require('../lib/requestutils');
 class SelectAction{
   op(req, res){
     return new Promise((resolve, reject) => {
-      let selectedNumber =  utils.getparameter(req, 'selectedNumber');
+      let product = utils.getparameter(req, "product");
+      let brand = utils.getparameter(req, "brand");
+      selectedQuantity =  utils.getparameter(req, 'selectedQuantity');
       
-      //TODO: this should not be in the contexts but in the parameters
-      let products = req.body.result.contexts[0].parameters.products;
-      let selectedProduct = products[selectedNumber - 1].slice(3);
-
       // Call the search api
-      mb.callSearch(selectedProduct).then((output) => {
+      mb.callSearch(product, brand, selectedQuantity).then((output) => {
         let responseJson = '';
         if(typeof output.data !== 'undefined' && output.data !== null){
           if (output.data.length === 1){
