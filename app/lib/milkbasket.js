@@ -1,11 +1,11 @@
 let request = require('request');
 
 //TODO: this should be called with query, brand, quantity (Or possibly just search params)
-function callSearch(query, brand){
+function callSearch(query, brand, quantity){
   return new Promise((resolve, reject) => {
     var options =  {
         uri: 'http://dev.milkbasket.com/products/search',
-        body: JSON.stringify({"search_text": query, "brand_name":brand}),
+        body: JSON.stringify({"search_text": query, "brand_name":brand, "weight":quantity}),
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

@@ -8,6 +8,7 @@ class SelectBrandAction{
             let selectedBrand =  utils.getparameter(req, 'brand');
             let product = utils.getparameter(req, 'product');
 
+            //Call MB search with product, brand
             mb.callSearch(product, selectedBrand).then((output) => {
                 let responseJson = '';
                 console.log(output);
