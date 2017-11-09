@@ -13,18 +13,18 @@ class SearchAction{
         if(typeof output.data !== 'undefined' && output.data !== null){
           if(output.data.length > 1){
             //TODO: brand selection result
-            let brands = getbrands(output);
+            let brands = mb.getbrands(output);
             if(brands.length > 1){
-              responseJson = getBrandsResponse(brands);
+              responseJson = utils.getBrandsResponse(brands);
             } else {
               //quantity selection result
-              let quantities = getquantities(output); 
+              let quantities = mb.getquantities(output); 
               console.log("Found " + quantities.length + " quantities");
               if (quantities.length > 1){
-                responseJson = getQuantitiesResponse(quantities);
+                responseJson = utils.getQuantitiesResponse(quantities);
               } else {
                 //send a regular 'multiple results' response
-                responseJson = getMultipleResultsResponse(output);
+                responseJson = utils.getMultipleResultsResponse(output);
               }
             }
           } else if (output.data.length === 1){
@@ -51,95 +51,6 @@ class SearchAction{
       });
     });
   }
-}
-
-function getbrands(output) {
-  if(typeof output.data !== 'undefined' && output.data !== null){
-    let brands = output.data.map(function(product, index, array){
-      //TODO: we do not have brands yet
-      return product.brand_name;
-    });
-    //remove duplicates
-    return uniq(brands);
-  }
-}
-
-function getquantities(output) {
-  if(typeof output.data !== 'undefined' && output.data !== null){
-    let quantities = output.data.map(function(product, index, array){
-      return product.wgt;
-    });
-    //remove duplicates
-    return uniq(quantities);
-  }
-}
-
-function uniq(a) {
-  let seen = {};
-  return a.filter(function(item) {
-      return seen.hasOwnProperty(item) ? false : (seen[item] = true);
-  });
-}
-
-function getBrandsResponse(brands){
-  let response = 'I have found multiple brands.';
-  let more = '';
-  let morebrands = [];
-  if(brands.length > 3){
-    more = 'more';
-    morebrands = brands.slice(3);
-  }
-
-  //"followupEvent" to send the user to the next step
-  responseJson = stringify({ "speech": response, "displayText": response, "followupEvent": {
-    "name": "product_multiple_brands",
-    "data": {
-      "brands":brands.slice(0,3),
-      "moreresults":more,
-      "morebrands":morebrands
-    }
-  }});
-  return responseJson;
-}
-
-function getQuantitiesResponse(quantities){
-  let response = 'I have found multiple quantities.';
-  let more = '';
-  let morequantities = [];
-  if(quantities.length > 3){
-    more = 'more';
-    morequantities = quantities.slice(3);
-  }
-
-  //"followupEvent" to send the user to the next step
-  responseJson = stringify({ "speech": response, "displayText": response, "followupEvent": {
-    "name": "product_multiple_quantities",
-    "data": {
-      "quantities":quantities.slice(0,3),
-      "moreresults":more,
-      "morequantities":morequantities
-    }
-  }});
-  return responseJson;  
-}
-
-function getMultipleResultsResponse(output){
-  let response = 'I have found multiple products.';
-  let responseJson = '';
-  if(typeof output.data !== 'undefined' && output.data !== null){
-    let productNames = output.data.map(function(product, index, array){
-      return (index + 1) + '. ' +  product.nm;
-    });
-
-    //"followupEvent" to send the user to the next step
-    responseJson = stringify({ "speech": response, "displayText": response, "followupEvent": {
-      "name": "product_multiple_results",
-      "data": {
-        "products":productNames.slice(0,3)
-      }
-    }});
-  }
-  return responseJson;
 }
 
 module.exports = SearchAction;
