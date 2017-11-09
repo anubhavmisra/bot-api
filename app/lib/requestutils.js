@@ -71,7 +71,7 @@ function getMultipleResultsResponse(output){
   let responseJson = '';
   if(typeof output.data !== 'undefined' && output.data !== null){
     let productNames = output.data.map(function(product, index, array){
-      product.nm;
+      return product.nm;
     });
 
     //"followupEvent" to send the user to the next step
