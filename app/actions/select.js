@@ -4,14 +4,18 @@ let utils = require('../lib/requestutils');
 
 class SelectAction{
   op(req, res){
+    
     return new Promise((resolve, reject) => {
       let product = utils.getparameter(req, "product");
       let brand = utils.getparameter(req, "brand");
-      selectedQuantity =  utils.getparameter(req, 'selectedQuantity');
+      let selectedQuantity =  utils.getparameter(req, "selectedQuantity");
       
+
+      console.log("p " + product + " b " + brand + " q " + selectedQuantity);
       // Call the search api
       mb.callSearch(product, brand, selectedQuantity).then((output) => {
         let responseJson = '';
+
         if(typeof output.data !== 'undefined' && output.data !== null){
           if (output.data.length === 1){
             //TODO: add this product to the basket
@@ -22,12 +26,12 @@ class SelectAction{
             responseJson = stringify({ "speech": response, "displayText": response});
           } else {
             //FIXME We do not like this case. The product should be found by the select
-            let response = `There are an unexpected number of results for ${selectedProduct}.`;
+            let response = `There are an unexpected number of results for ${product}.`;
             responseJson = stringify({ "speech": response, "displayText": response});
           }
         } else{
           //FIXME We do not like this case. The product should be found by the select
-          let response = `There are an unexpected number of results for ${selectedProduct}.`;
+          let response = `There are an unexpected number of results for ${product}.`;
           responseJson = stringify({ "speech": response, "displayText": response});
         }
         resolve(responseJson);
