@@ -2,15 +2,15 @@ let stringify = require('json-stringify');
 let mb = require('../lib/milkbasket');
 let utils = require('../lib/requestutils');
 
-class SelectQuantityAction{
+class SelectWeightAction{
     op(req, res){
         return new Promise((resolve, reject) => {
-            let selectedQuantity =  utils.getparameter(req, 'selectedQuantity');
+            let selectedWeight =  utils.getparameter(req, 'selectedWeight');
             let product = utils.getparameter(req, 'product');
             let brand = utils.getparameter(req, 'brand');
 
-            //call MB search with product, brand, quantity
-            mb.callSearch(product, brand, selectedQuantity).then((output) => {
+            //call MB search with product, brand, weight
+            mb.callSearch(product, brand, selectedWeight).then((output) => {
                 let responseJson = '';
                 console.log(output);
                 if(typeof output.data !== 'undefined' && output.data !== null){
@@ -43,4 +43,4 @@ class SelectQuantityAction{
     }
 }
  
-module.exports = SelectQuantityAction;
+module.exports = SelectWeightAction;

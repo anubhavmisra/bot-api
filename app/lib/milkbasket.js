@@ -1,11 +1,11 @@
 let request = require('request');
 
-//TODO: this should be called with query, brand, quantity (Or possibly just search params)
-function callSearch(query, brand, quantity){
+//TODO: this should be called with query, brand, weight (Or possibly just search params)
+function callSearch(query, brand, weight){
   return new Promise((resolve, reject) => {
     var options =  {
         uri: 'http://dev.milkbasket.com/products/search',
-        body: JSON.stringify({"search_text": query, "brand_name":brand, "weight":quantity}),
+        body: JSON.stringify({"search_text": query, "brand_name":brand, "weight":weight}),
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -31,13 +31,13 @@ function getbrands(output) {
   }
 }
 
-function getquantities(output) {
+function getweights(output) {
   if(typeof output.data !== 'undefined' && output.data !== null){
-      let quantities = output.data.map(function(product, index, array){
+      let weights = output.data.map(function(product, index, array){
       return product.wgt;
       });
       //remove duplicates
-      return uniq(quantities);
+      return uniq(weights);
   }
 }
 
@@ -50,4 +50,4 @@ function uniq(a) {
 
 module.exports.callSearch = callSearch;
 module.exports.getbrands = getbrands;
-module.exports.getquantities = getquantities;
+module.exports.getweights = getweights;

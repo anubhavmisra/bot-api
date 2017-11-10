@@ -14,11 +14,11 @@ class SelectBrandAction{
                 console.log(output);
                 if(typeof output.data !== 'undefined' && output.data !== null){
                   if(output.data.length > 1){
-                    //quantity selection result
-                    let quantities = mb.getquantities(output); 
-                    console.log("Found " + quantities.length + " quantities");
-                    if (quantities.length > 1){
-                        responseJson = utils.getQuantitiesResponse(quantities);
+                    //Are there multiple weigths?
+                    let weights = mb.getweights(output); 
+                    console.log("Found " + weights.length + " weights");
+                    if (weights.length > 1){
+                        responseJson = utils.getWeightsResponse(weights);
                     } else {
                         //send a regular 'multiple results' response
                         responseJson = utils.getMultipleResultsResponse(output);

@@ -1,22 +1,22 @@
 let stringify = require('json-stringify');
 let utils = require('../lib/requestutils');
 
-class ShowMoreQuantityAction{
+class ShowMoreWeightAction{
     op(req, res){
         return new Promise((resolve, reject) => {
             
-            let response = 'I have found multiple quantities.';
+            let response = 'I have found multiple weights.';
             //"followupEvent" to send the user to the next step
             
-            let quantities = utils.getparameter(req, 'morequantities');
-            quantities = quantities.concat(utils.getparameter(req, 'quantities'));
+            let weights = utils.getparameter(req, 'moreweights');
+            weights = weights.concat(utils.getparameter(req, 'weights'));
 
             let responseJson = stringify({ "speech": response, "displayText": response, "followupEvent": {
-                "name": "product_multiple_quantities",
+                "name": "product_multiple_weights",
                 "data": {
-                    "quantities":quantities.slice(0,3),
+                    "weights":weights.slice(0,3),
                     "moreresults":'more',
-                    "morequantities":quantities.slice(3)
+                    "moreweights":weights.slice(3)
                 }
             }});
             resolve(responseJson);
@@ -27,4 +27,4 @@ class ShowMoreQuantityAction{
     }
 }
  
-module.exports = ShowMoreQuantityAction;
+module.exports = ShowMoreWeightAction;

@@ -1,19 +1,19 @@
 let search = require('./actions/search');
-let select = require('./actions/select');
+let selectmultiple = require('./actions/selectmultiple');
 let showbasket = require('./actions/showbasket');
 let checkexternalid = require('./actions/checkexternalid');
-let showmorequantities = require('./actions/showmorequantities');
-let selectquantity = require('./actions/selectquantity');
+let showmoreweights = require('./actions/showmoreweights');
+let selectweight = require('./actions/selectweight');
 let showmorebrands = require('./actions/showmorebrands');
 let selectbrand = require('./actions/selectbrand');
 
 let actionFactory = {
   'search': new search(),
-  'select': new select(),
+  'selectmultiple': new selectmultiple(),
   'showbasket': new showbasket(),
   'checkexternalid': new checkexternalid(),
-  'showmorequantities': new showmorequantities(),
-  'selectquantity': new selectquantity(),
+  'showmoreweights': new showmoreweights(),
+  'selectweight': new selectweight(),
   'showmorebrands': new showmorebrands(),
   'selectbrand': new selectbrand()
 };

@@ -1,8 +1,8 @@
-const SELECT_MULTIRESULT = 'MultipleResults-selectnumber';
+const SELECT_MULTIRESULT = 'OrderIntent-MultipleResults-select';
 const GET_BASKET = 'basket.get';
-const SHOW_MORE_QUANTITIES = 'OrderIntent-MultipleQuantities-more';
+const SHOW_MORE_WEIGHTS = 'OrderIntent-MultipleWeights-more';
 const SHOW_MORE_BRANDS = 'OrderIntent-MultipleBrands-more';
-const SELECT_QUANTITY = 'OrderIntent-MultipleQuantities-select';
+const SELECT_WEIGHT = 'OrderIntent-MultipleWeights-select';
 const SELECT_BRAND = 'OrderIntent-MultipleBrands-select';
 
 function resolveAction(req){
@@ -11,13 +11,13 @@ function resolveAction(req){
     // Retrieve action name from request
     let actionName = req.body.result.action;
     if(actionName === SELECT_MULTIRESULT){
-      return 'select';
+      return 'selectmultiple';
     } else if(actionName === GET_BASKET){
       return 'showbasket';
-    } else if(actionName === SHOW_MORE_QUANTITIES){
-      return 'showmorequantities';
-    } else if(actionName === SELECT_QUANTITY){
-      return 'selectquantity';
+    } else if(actionName === SHOW_MORE_WEIGHTS){
+      return 'showmoreweights';
+    } else if(actionName === SELECT_WEIGHT){
+      return 'selectweight';
     } else if(actionName === SHOW_MORE_BRANDS){
       return 'showmorebrands';
     } else if(actionName === SELECT_BRAND){

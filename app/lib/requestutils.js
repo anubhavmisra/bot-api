@@ -45,22 +45,22 @@ function getBrandsResponse(brands){
   return responseJson;
 }
 
-function getQuantitiesResponse(quantities){
-  let response = 'I have found multiple quantities.';
+function getWeightsResponse(weights){
+  let response = 'I have found multiple weights.';
   let more = '';
-  let morequantities = [];
-  if(quantities.length > 3){
+  let moreweights = [];
+  if(weights.length > 3){
     more = 'more';
-    morequantities = quantities.slice(3);
+    moreweights = weights.slice(3);
   }
 
   //"followupEvent" to send the user to the next step
   responseJson = stringify({ "speech": response, "displayText": response, "followupEvent": {
-    "name": "product_multiple_quantities",
+    "name": "product_multiple_weights",
     "data": {
-      "quantities":quantities.slice(0,3),
+      "weights":weights.slice(0,3),
       "moreresults":more,
-      "morequantities":morequantities
+      "moreweights":moreweights
     }
   }});
   return responseJson;  
@@ -89,5 +89,5 @@ function getMultipleResultsResponse(output){
 module.exports.getexternalid = getexternalid;
 module.exports.getparameter = getparameter;
 module.exports.getBrandsResponse = getBrandsResponse;
-module.exports.getQuantitiesResponse = getQuantitiesResponse;
+module.exports.getWeightsResponse = getWeightsResponse;
 module.exports.getMultipleResultsResponse = getMultipleResultsResponse;
