@@ -38,8 +38,8 @@ function getBrandsResponse(brands){
     "name": "product_multiple_brands",
     "data": {
       "brands":brands.slice(0,3),
-      "moreresults":more,
-      "morebrands":morebrands
+      "hasMoreResults":more,
+      "moreBrands":morebrands
     }
   }});
   return responseJson;
@@ -59,8 +59,8 @@ function getWeightsResponse(weights){
     "name": "product_multiple_weights",
     "data": {
       "weights":weights.slice(0,3),
-      "moreresults":more,
-      "moreweights":moreweights
+      "hasMoreResults":more,
+      "moreWeights":moreweights
     }
   }});
   return responseJson;  
