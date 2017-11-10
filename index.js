@@ -24,7 +24,7 @@ app.post('/api/order', function(req, res) {
   action.op(req, res).then((responseJson)  => {
     res.setHeader('Content-Type', 'application/json');
     console.log("Sending response:");
-    console.log(JSON.stringify(req.body,null,2));
+    console.log(JSON.stringify(responseJson,null,2));
     //TODO: maybe better to stringify here?
     res.send(responseJson);
   }).catch((error) => {
