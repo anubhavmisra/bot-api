@@ -8,15 +8,15 @@ class ShowMoreWeightAction{
             let response = 'I have found multiple weights.';
             //"followupEvent" to send the user to the next step
             
-            let weights = utils.getparameter(req, 'moreweights');
+            let weights = utils.getparameter(req, 'moreWeights');
             weights = weights.concat(utils.getparameter(req, 'weights'));
 
             let responseJson = stringify({ "speech": response, "displayText": response, "followupEvent": {
                 "name": "product_multiple_weights",
                 "data": {
                     "weights":weights.slice(0,3),
-                    "moreresults":'more',
-                    "moreweights":weights.slice(3)
+                    "hasMoreResults":'more',
+                    "moreWeights":weights.slice(3)
                 }
             }});
             resolve(responseJson);

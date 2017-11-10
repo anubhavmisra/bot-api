@@ -8,15 +8,15 @@ class ShowMoreBrandAction{
             let response = 'I have found multiple brands.';
             //"followupEvent" to send the user to the next step
             
-            let brands = utils.getparameter(req, 'morebrands');
+            let brands = utils.getparameter(req, 'moreBrands');
             brands = brands.concat(utils.getparameter(req, 'brands'));
 
             let responseJson = stringify({ "speech": response, "displayText": response, "followupEvent": {
                 "name": "product_multiple_brands",
                 "data": {
                     "brands":brands.slice(0,3),
-                    "moreresults":'more',
-                    "morebrands":brands.slice(3)
+                    "hasMoreResults":'more',
+                    "moreBrands":brands.slice(3)
                 }
             }});
             resolve(responseJson);
