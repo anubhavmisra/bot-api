@@ -74,11 +74,20 @@ function getMultipleResultsResponse(output){
       return product.nm;
     });
 
+    let more = '';
+    let moreProducts = [];
+    if(brands.length > 3){
+      more = 'more';
+      moreProducts = productNames.slice(3);
+    }
+  
     //"followupEvent" to send the user to the next step
     responseJson = stringify({ "speech": response, "displayText": response, "followupEvent": {
-      "name": "product_multiple_results",
+      "name": "product_multiple_products",
       "data": {
-        "products":productNames.slice(0,3)
+        "products":productNames.slice(0,3),
+        "hasMoreResults":more,
+        "moreProducts":moreProducts
       }
     }});
   }
