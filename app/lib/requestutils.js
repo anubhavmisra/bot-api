@@ -76,7 +76,7 @@ function getMultipleResultsResponse(output){
 
     let more = '';
     let moreProducts = [];
-    if(brands.length > 3){
+    if(productNames.length > 3){
       more = 'more';
       moreProducts = productNames.slice(3);
     }
