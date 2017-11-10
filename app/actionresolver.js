@@ -1,17 +1,24 @@
-const SELECT_MULTIRESULT = 'OrderIntent-MultipleResults-select';
+const ORDER_INTENT = 'OrderIntent';
+const MULTIPLE_BRANDS = 'OrderIntent-MultipleBrands';
+const SELECT_BRAND = ORDER_INTENT + '.'+ MULTIPLE_BRANDS + '.OrderIntent-MultipleBrands-select';
+const SHOW_MORE_BRANDS = ORDER_INTENT + '.'+ MULTIPLE_BRANDS + '.OrderIntent-MultipleBrands-more';
+const MULTIPLE_WEIGHTS = 'OrderIntent-MultipleWeights';
+const SHOW_MORE_WEIGHTS = ORDER_INTENT + '.'+ MULTIPLE_WEIGHTS + '.OrderIntent-MultipleWeights-more';
+const SELECT_WEIGHT = ORDER_INTENT + '.'+ MULTIPLE_WEIGHTS + 'OrderIntent-MultipleWeights-select';
+const MULTIPLE_PRODUCTS = 'OrderIntent-MultipleProducts'
+const SELECT_MULTIPRODUCT = ORDER_INTENT + '.'+ MULTIPLE_PRODUCTS + '.OrderIntent-MultipleProducts-select';
+const SHOW_MORE_MULTIPRODUCT = ORDER_INTENT + '.'+ MULTIPLE_PRODUCTS + '.OrderIntent-MultipleProducts-more';
 const GET_BASKET = 'basket.get';
-const SHOW_MORE_WEIGHTS = 'OrderIntent-MultipleWeights-more';
-const SHOW_MORE_BRANDS = 'OrderIntent-MultipleBrands-more';
-const SELECT_WEIGHT = 'OrderIntent-MultipleWeights-select';
-const SELECT_BRAND = 'OrderIntent-MultipleBrands-select';
 
 function resolveAction(req){
   //Check result is defined
   if (typeof req.body.result !== 'undefined' && req.body.result !== null){
     // Retrieve action name from request
     let actionName = req.body.result.action;
-    if(actionName === SELECT_MULTIRESULT){
+    if(actionName === SELECT_MULTIPRODUCT){
       return 'selectmultiple';
+    } else if(actionName === SHOW_MORE_MULTIPRODUCT){
+      return 'showmoreproducts';
     } else if(actionName === GET_BASKET){
       return 'showbasket';
     } else if(actionName === SHOW_MORE_WEIGHTS){
