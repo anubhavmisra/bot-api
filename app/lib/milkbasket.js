@@ -15,6 +15,7 @@ function callSearch(query, brand, weight){
       if (!error && response.statusCode == 200) {
         resolve(JSON.parse(response.body));
       } else {
+        console.log("Call to MB api failed" + error);
         reject(error);
       }
     });
