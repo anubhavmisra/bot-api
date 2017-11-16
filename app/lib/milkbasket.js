@@ -57,8 +57,6 @@ function uniq(a) {
 
 function order(userid, productid, quantity){
   return new Promise((resolve, reject) => {
-    console.log("request body: "  + JSON.stringify({"facebookId": userid, "product_id":productid, "quantity":quantity}));  
-
     var options =  {
         uri: MB_API_URL + '/backend/v1/ConversationApi/order',
         method: 'POST',

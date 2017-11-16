@@ -18,12 +18,18 @@ class SelectWeightAction{
                     //send a regular 'multiple results' response
                     responseJson = utils.getMultipleResultsResponse(output);
                   } else if (output.data.length === 1){
-                    //TODO: add this product to the basket
-        
-                    //"speech" is the spoken version of the response, "displayText" is the visual version
-                    //Default response: show added product name
-                    let response = `I have added \'${output.data[0].nm}\' to your basket(Not really).`;
-                    responseJson = stringify({ "speech": response, "displayText": response});
+                    //add this product to the basket
+                    let quantity = utils.getparameter(req, 'quantity');
+                    let extid = utils.getexternalid(req);
+                    mb.order(extid, output.data[0].id).then((orderresponse) => {
+                        //Default response: show added product name
+                        let response = `I have added ${quantity} \'${output.data[0].nm}\' to your basket.`;
+                        responseJson = stringify({ "speech": response, "displayText": response});
+                        resolve(responseJson);
+                    }).catch((error) => {
+                        console.log(error);
+                        reject(error);
+                    });                        
                   } else if (output.data.length < 1){
                     //Default response: no results
                     let response = `I could not find any results for ${product}.`;
@@ -34,7 +40,9 @@ class SelectWeightAction{
                   responseJson = stringify({ "speech": response, "displayText": response});
                 }
         
-                resolve(responseJson);
+                if (output.data.length !== 1){
+                  resolve(responseJson);
+                }
             }).catch((error) => {
                 console.log(error);
                 reject(error);
