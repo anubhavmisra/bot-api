@@ -8,10 +8,10 @@ class SelectMultipleAction{
     return new Promise((resolve, reject) => {
       let product = utils.getparameter(req, "product");
       let brand = utils.getparameter(req, "brand");
-      let selectedWeight =  utils.getparameter(req, "selectedWeight");
+      let weight =  utils.getparameter(req, "weight");
       
       // Call the search api
-      mb.callSearch(product, brand, selectedWeight).then((output) => {
+      mb.callSearch(product, brand, weight).then((output) => {
         let responseJson = '';
 
         if(typeof output.data !== 'undefined' && output.data !== null){
