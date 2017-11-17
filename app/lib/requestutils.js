@@ -13,6 +13,17 @@ function getexternalid(req){
   return extid;
 }
 
+function getloggedinuser(req){
+  let userid = '';
+  let contexts = req.body.result.contexts;
+  let usercontext = contexts.filter(function(item) { return item.name === 'usercontext_mb'; });
+  if(usercontext.length > 0){
+    userid = usercontext[0].parameters.userid;
+    console.log('request from logged in user ' + userid);
+  }
+  return userid;
+}
+
 function getparameter(req, parametername){
     let paramValue = '';
     //Check result is defined
@@ -42,6 +53,7 @@ function getBrandsResponse(brands){
       "moreBrands":morebrands
     }
   }});
+
   return responseJson;
 }
 
@@ -97,6 +109,7 @@ function getMultipleResultsResponse(output){
 
 module.exports.getexternalid = getexternalid;
 module.exports.getparameter = getparameter;
+module.exports.getloggedinuser = getloggedinuser;
 module.exports.getBrandsResponse = getBrandsResponse;
 module.exports.getWeightsResponse = getWeightsResponse;
 module.exports.getMultipleResultsResponse = getMultipleResultsResponse;
