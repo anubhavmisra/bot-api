@@ -27,7 +27,7 @@ class SelectBrandAction{
                         //add this product to the basket
                         let quantity = utils.getparameter(req, 'quantity');
                         let extid = utils.getexternalid(req);
-                        mb.order(extid, output.data[0].id).then((orderresponse) => {
+                        mb.order(extid, output.data[0].id, quantity).then((orderresponse) => {
                             //Default response: show added product name
                             let response = `I have added ${quantity} \'${output.data[0].nm}\' to your basket.`;
                             responseJson = stringify({ "speech": response, "displayText": response});
