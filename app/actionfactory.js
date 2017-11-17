@@ -2,7 +2,6 @@ let search = require('./actions/search');
 let selectmultiple = require('./actions/selectmultiple');
 let showmoreproducts = require('./actions/showmoreproducts');
 let showbasket = require('./actions/showbasket');
-let checkexternalid = require('./actions/checkexternalid');
 let showmoreweights = require('./actions/showmoreweights');
 let selectweight = require('./actions/selectweight');
 let showmorebrands = require('./actions/showmorebrands');
@@ -13,7 +12,6 @@ let actionFactory = {
   'selectmultiple': new selectmultiple(),
   'showmoreproducts': new showmoreproducts(),
   'showbasket': new showbasket(),
-  'checkexternalid': new checkexternalid(),
   'showmoreweights': new showmoreweights(),
   'selectweight': new selectweight(),
   'showmorebrands': new showmorebrands(),
