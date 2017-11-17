@@ -113,10 +113,40 @@ function getBasketItemNames(output) {
   }
 }  
 
+function isValidUser(extid){
+  return new Promise((resolve, reject) => {
+    queryobject = querystring.stringify({facebookId: extid});
+    var options =  {
+        uri: MB_API_URL + '/backend/v1/ConversationApi/getProfile?' + queryobject,
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+    request(options, function (error, response) {
+      if (!error && response.statusCode == 200) {
+        resolve(JSON.parse(response.body));
+      } else {
+        if(typeof response !== 'undefined'){
+          if(response.statusCode === 404){
+            //Profile could not be found. Resolve with false.
+            resolve(false);
+          } else {
+            reject(error);
+          }
+        } else {
+          reject(error);
+        }
+      }
+    });
+  });
+}
+
 module.exports.callSearch = callSearch;
 module.exports.getbrands = getbrands;
 module.exports.getweights = getweights;
 module.exports.order = order;
 module.exports.getbasket = getbasket;
 module.exports.getBasketItemNames = getBasketItemNames;
+module.exports.isValidUser = isValidUser;
 
