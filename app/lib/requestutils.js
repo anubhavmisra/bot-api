@@ -19,10 +19,12 @@ function getexternalid(req){
 function getloggedinuser(req){
   let userid = '';
   let contexts = req.body.result.contexts;
-  let usercontext = contexts.filter(function(item) { return item.name === 'usercontext_mb'; });
-  if(usercontext.length > 0){
-    userid = usercontext[0].parameters.userid;
-    console.log('request from logged in user ' + userid);
+  if(typeof contexts !== 'undefined'){
+    let usercontext = contexts.filter(function(item) { return item.name === 'usercontext_mb'; });
+    if(usercontext.length > 0){
+      userid = usercontext[0].parameters.userid;
+      console.log('request from logged in user ' + userid);
+    }
   }
   return userid;
 }
