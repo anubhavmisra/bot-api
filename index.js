@@ -34,20 +34,13 @@ app.post('/api/order', function(req, res) {
         res.send(responseJson);
       } else {
         let userid = isValidUser.id;
-        //switch up logic based on "action" parameter
+        //Switch up logic based on "action" parameter
         let actionName = actionresolver.resolveAction(req);
         let action = actionfactory[actionName];
 
+        //Perform the resolved action
         action.op(req, res).then((responseJson)  => {
-          parsedJson = JSON.parse(responseJson);
-          //Add the userid to an 'out' context
-          parsedJson.contextOut = [{"name":"usercontext_MB", "lifespan":5, "parameters":{"userid":userid}}];
-          
-          console.log("Sending response:");
-          console.log(JSON.stringify(parsedJson,null,2));
-          
-          res.setHeader('Content-Type', 'application/json');
-          res.send(JSON.stringify(parsedJson));
+          sendResponse(res, responseJson, userid);
         }).catch((error) => {
           //Let the user know if an error occurred
           console.log("Error: " + error);
@@ -62,19 +55,13 @@ app.post('/api/order', function(req, res) {
       res.send(JSON.stringify({ 'speech': error, 'displayText': error }));
     });
   } else{
+    //Switch up logic based on "action" parameter
     let actionName = actionresolver.resolveAction(req);
     let action = actionfactory[actionName];
 
+    //Perform the resolved action
     action.op(req, res).then((responseJson)  => {
-      parsedJson = JSON.parse(responseJson);
-      //Add the userid to an 'out' context
-      parsedJson.contextOut = [{"name":"usercontext_MB", "lifespan":5, "parameters":{"userid":useridfromcontext}}];
-      
-      console.log("Sending response:");
-      console.log(JSON.stringify(parsedJson,null,2));
-      
-      res.setHeader('Content-Type', 'application/json');
-      res.send(JSON.stringify(parsedJson));
+      sendResponse(res, responseJson, useridfromcontext);
     }).catch((error) => {
       //Let the user know if an error occurred
       console.log("Error: " + error);
@@ -84,5 +71,18 @@ app.post('/api/order', function(req, res) {
 
   }
 });
+
+//add the userid to the response json and send
+function sendResponse(res, responseJson, userid){
+  parsedJson = JSON.parse(responseJson);
+  //Add the userid to an 'out' context
+  parsedJson.contextOut = [{"name":"usercontext_MB", "lifespan":5, "parameters":{"userid":userid}}];
+  
+  console.log("Sending response:");
+  console.log(JSON.stringify(parsedJson,null,2));
+  
+  res.setHeader('Content-Type', 'application/json');
+  res.send(JSON.stringify(parsedJson));
+}
 
 app.listen(process.env.PORT || 3001);
