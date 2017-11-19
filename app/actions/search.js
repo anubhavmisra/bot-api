@@ -20,7 +20,6 @@ class SearchAction{
             } else {
               //Are there muliple weigths?
               let weights = mb.getweights(output); 
-              console.log("Found " + weights.length + " weights");
               if (weights.length > 1){
                 responseJson = utils.getWeightsResponse(weights);
               } else {

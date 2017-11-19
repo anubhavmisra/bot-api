@@ -9,7 +9,6 @@ function getexternalid(req){
     //Case facebook  
     if(req.body.originalRequest.source === 'facebook'){
       extid = req.body.originalRequest.data.sender.id;
-      console.log('facebook request from user ' + extid);
     }
   }
   return extid;
@@ -23,7 +22,6 @@ function getloggedinuser(req){
     let usercontext = contexts.filter(function(item) { return item.name === 'usercontext_mb'; });
     if(usercontext.length > 0){
       userid = usercontext[0].parameters.userid;
-      console.log('request from logged in user ' + userid);
     }
   }
   return userid;

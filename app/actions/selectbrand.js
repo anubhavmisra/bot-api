@@ -12,12 +12,10 @@ class SelectBrandAction{
             //Call MB search with product, brand
             mb.callSearch(product, selectedBrand).then((output) => {
                 let responseJson = '';
-                console.log(output);
                 if(typeof output.data !== 'undefined' && output.data !== null){
                   if(output.data.length > 1){
                     //Are there multiple weigths?
                     let weights = mb.getweights(output); 
-                    console.log("Found " + weights.length + " weights");
                     if (weights.length > 1){
                         responseJson = utils.getWeightsResponse(weights);
                     } else {

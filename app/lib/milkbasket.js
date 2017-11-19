@@ -22,6 +22,7 @@ function callSearch(query, brand, weight){
         console.log("Call to MB api failed: " + error);
         if(typeof response !== 'undefined'){
           console.log(" Status code :" + response.statusCode);
+          console.log(" response :" + response.body);
         }
         reject(error);
       }
@@ -102,6 +103,7 @@ function getbasket(userid){
         console.log("Call to MB api failed: " + error);
         if(typeof response !== 'undefined'){
           console.log(" Status code :" + response.statusCode);
+          console.log(" response :" + response.body);
         }
         reject(error);
       }

@@ -13,7 +13,6 @@ class SelectWeightAction{
             //call MB search with product, brand, weight
             mb.callSearch(product, brand, selectedWeight).then((output) => {
                 let responseJson = '';
-                console.log(output);
                 if(typeof output.data !== 'undefined' && output.data !== null){
                   if(output.data.length > 1){
                     //send a regular 'multiple results' response
