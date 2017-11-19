@@ -1,3 +1,4 @@
+//Library to call MB backend functionality
 let request = require('request');
 let querystring = require('querystring');
 
@@ -28,6 +29,7 @@ function callSearch(query, brand, weight){
   });
 }
 
+//Get the brands of the found products
 function getbrands(output) {
   if(typeof output.data !== 'undefined' && output.data !== null){
     let brands = output.data.map(function(product, index, array){
@@ -38,6 +40,7 @@ function getbrands(output) {
   }
 }
 
+//Get the weigths of the found products
 function getweights(output) {
   if(typeof output.data !== 'undefined' && output.data !== null){
       let weights = output.data.map(function(product, index, array){
@@ -55,6 +58,7 @@ function uniq(a) {
   });
 }
 
+//Order a product
 function order(userid, productid, quantity){
   return new Promise((resolve, reject) => {
     var options =  {
@@ -80,6 +84,7 @@ function order(userid, productid, quantity){
   });
 }
 
+//Retrieve basket for user
 function getbasket(userid){
   return new Promise((resolve, reject) => {
     queryobject = querystring.stringify({facebookId: userid});
@@ -104,6 +109,7 @@ function getbasket(userid){
   });
 }
 
+//Return strings representing product and quantity
 function getBasketItemNames(output) {
   if(typeof output.products !== 'undefined' && output.products !== null){
     let names = output.products.map(function(product, index, array){
@@ -113,6 +119,7 @@ function getBasketItemNames(output) {
   }
 }  
 
+//Check if user exists in MB backend. Returns user object if found, false otherwise
 function isValidUser(extid){
   return new Promise((resolve, reject) => {
     queryobject = querystring.stringify({facebookId: extid});

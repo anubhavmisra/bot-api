@@ -1,5 +1,7 @@
+//Library for utility functions on DialogFlow requests
 let stringify = require('json-stringify');
 
+//Retrieve external ID for user
 function getexternalid(req){
   let extid = '';
   //What is the source of this request?
@@ -13,6 +15,7 @@ function getexternalid(req){
   return extid;
 }
 
+//Retrieve user id for a user that has already been verified in MB backend
 function getloggedinuser(req){
   let userid = '';
   let contexts = req.body.result.contexts;
@@ -24,6 +27,7 @@ function getloggedinuser(req){
   return userid;
 }
 
+//Retrieve a parameter from request
 function getparameter(req, parametername){
     let paramValue = '';
     //Check result is defined
@@ -35,6 +39,7 @@ function getparameter(req, parametername){
     return paramValue;
 }
 
+//Construct response JSON for multiple brands
 function getBrandsResponse(brands){
   let response = 'I have found multiple brands.';
   let more = '';
@@ -57,6 +62,7 @@ function getBrandsResponse(brands){
   return responseJson;
 }
 
+//Construct response JSON for multiple weights
 function getWeightsResponse(weights){
   let response = 'I have found multiple weights.';
   let more = '';
@@ -78,6 +84,7 @@ function getWeightsResponse(weights){
   return responseJson;  
 }
 
+//Construct response JSON for multiple results
 function getMultipleResultsResponse(output){
   let response = 'I have found multiple products.';
   let responseJson = '';
