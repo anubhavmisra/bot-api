@@ -1,3 +1,4 @@
+//Express app to handle requests from DialogFlow bot
 let express = require('express');
 let bodyParser = require('body-parser');
 
@@ -12,13 +13,13 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 }));
 
+//Handle requests from DialogFlow
 app.post('/api/order', function(req, res) {
   console.log("Receiving request:");
   console.log(JSON.stringify(req.body,null,2));
 
   // Check if user is already logged in
   // Only check id at backend if not found
-
   let useridfromcontext = utils.getloggedinuser(req);
 
   if(typeof useridfromcontext === undefined || useridfromcontext === ''){

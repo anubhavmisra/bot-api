@@ -1,6 +1,7 @@
 let stringify = require('json-stringify');
 let utils = require('../lib/requestutils');
 
+//Action to show the next 3 brands
 class ShowMoreBrandAction{
     op(req, res){
         return new Promise((resolve, reject) => {

@@ -2,6 +2,7 @@ let stringify = require('json-stringify');
 let mb = require('../lib/milkbasket');
 let utils = require('../lib/requestutils');
 
+//Action to perform a search for the specified brand and product
 class SelectBrandAction{
     op(req, res){
         return new Promise((resolve, reject) => {

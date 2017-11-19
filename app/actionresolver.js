@@ -10,6 +10,7 @@ const SELECT_MULTIPRODUCT = ORDER_INTENT + '.'+ MULTIPLE_PRODUCTS + '.OrderInten
 const SHOW_MORE_MULTIPRODUCT = ORDER_INTENT + '.'+ MULTIPLE_PRODUCTS + '.OrderIntent-MultipleProducts-more';
 const GET_BASKET = 'basket.get';
 
+//Maps actions from dialogFlow to the correct action js
 function resolveAction(req){
   //Check result is defined
   if (typeof req.body.result !== 'undefined' && req.body.result !== null){

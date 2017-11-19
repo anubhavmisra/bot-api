@@ -2,6 +2,7 @@ let stringify = require('json-stringify');
 let utils = require('../lib/requestutils');
 let mb = require('../lib/milkbasket');
 
+//Action to retrieve basker for current user
 class ShowBasketAction{
     op(req, res){
         return new Promise((resolve, reject) => {

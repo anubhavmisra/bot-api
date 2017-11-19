@@ -2,6 +2,7 @@ let stringify = require('json-stringify');
 let mb = require('../lib/milkbasket');
 let utils = require('../lib/requestutils');
 
+//Action to perform a search if there are multiple results for the original parameters
 class SelectMultipleAction{
   op(req, res){
     
