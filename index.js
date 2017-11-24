@@ -78,8 +78,9 @@ app.post('/api/order', function(req, res) {
 function sendResponse(res, responseJson, userid){
   parsedJson = JSON.parse(responseJson);
   //Add the userid to an 'out' context
-  parsedJson.contextOut = [{"name":"usercontext_MB", "lifespan":5, "parameters":{"userid":userid}}];
-  
+  if(typeof userid !== 'undefined' && userid !== "") {
+    parsedJson.contextOut = [{"name":"usercontext_MB", "lifespan":5, "parameters":{"userid":userid}}];
+  }
   console.log("Sending response:");
   console.log(JSON.stringify(parsedJson,null,2));
   
