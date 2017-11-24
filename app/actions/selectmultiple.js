@@ -9,13 +9,12 @@ class SelectMultipleAction{
     return new Promise((resolve, reject) => {
       let product = utils.getparameter(req, "product");
       let brand = utils.getparameter(req, "brand");
-      let weight =  utils.getparameter(req, "weight");
       let selectedproduct = utils.getparameter(req, "selectedProduct");
       
       let query = product + " " + selectedproduct;
 
       // Call the search api
-      mb.callSearch(query, brand, weight).then((output) => {
+      mb.callSearch(query, brand).then((output) => {
         let responseJson = '';
 
         if(typeof output.data !== 'undefined' && output.data !== null){
@@ -42,13 +41,11 @@ class SelectMultipleAction{
                 reject(error);
               });   
           } else {
-            //FIXME this should be a 'no results'
-            let response = `There are an unexpected number of results for ${product}.`;
+            let response = `There are no results for ${query}.`;
             responseJson = stringify({ "speech": response, "displayText": response});
           }
         } else{
-          //FIXME this should be a 'no results'
-          let response = `There are an unexpected number of results for ${product}.`;
+          let response = `There are no results for ${query}}.`;
           responseJson = stringify({ "speech": response, "displayText": response});
         }
         if (output.data.length !== 1){
