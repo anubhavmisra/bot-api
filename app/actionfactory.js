@@ -18,7 +18,8 @@ let actionFactory = {
   'selectweight': new selectweight(),
   'showmorebrands': new showmorebrands(),
   'selectbrand': new selectbrand(),
-  'generateOtp': new generateOtp()
+  'generateOtp': new generateOtp(),
+  'verifyOtp': new verifyOtp()
 };
 
 module.exports = actionFactory;
