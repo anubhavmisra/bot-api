@@ -7,6 +7,7 @@ let selectweight = require('./actions/selectweight');
 let showmorebrands = require('./actions/showmorebrands');
 let selectbrand = require('./actions/selectbrand');
 let generateOtp = require('./actions/generateOtp');
+let verifyOtp = require('./actions/verifyOtp');
 
 let actionFactory = {
   'search': new search(),

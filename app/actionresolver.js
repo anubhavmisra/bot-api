@@ -11,6 +11,7 @@ const SHOW_MORE_MULTIPRODUCT = ORDER_INTENT + '.'+ MULTIPLE_PRODUCTS + '.OrderIn
 const GET_BASKET = 'basket.get';
 const NEW_USER = 'NewUserIntent'
 const MOBILE_NUMBER = NEW_USER + '.NewUserIntent-mobilenumber';
+const OTP = MOBILE_NUMBER + '.NewUser-mobilenumber-found';
 
 //Maps actions from dialogFlow to the correct action js
 function resolveAction(req){
@@ -34,6 +35,8 @@ function resolveAction(req){
       return 'selectbrand';
     } else if(actionName === MOBILE_NUMBER){
       return 'generateOtp';
+    } else if(actionName === OTP){
+      return 'verifyOtp';
     } else {
       //Default action is searching for product
       return 'search';

@@ -9,7 +9,7 @@ let utils = require('./app/lib/requestutils');
 
 let app = express();
 
-const nonUserCheckActions = ['generateOtp'];
+const nonUserCheckActions = ['generateOtp', 'verifyOtp'];
 
 app.use(bodyParser.json());       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
