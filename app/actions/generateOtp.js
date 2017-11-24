@@ -2,7 +2,7 @@ let stringify = require('json-stringify');
 let utils = require('../lib/requestutils');
 let mb = require('../lib/milkbasket');
 
-//Action to retrieve basker for current user
+//Action to send an otp to the specified mobile number (if known)
 class GenerateOtpAction{
     op(req, res){
         return new Promise((resolve, reject) => {
