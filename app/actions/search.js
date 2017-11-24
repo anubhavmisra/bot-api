@@ -18,13 +18,20 @@ class SearchAction{
             if(brands.length > 1){
               responseJson = utils.getBrandsResponse(brands);
             } else {
-              //Are there muliple weigths?
-              let weights = mb.getweights(output); 
-              if (weights.length > 1){
-                responseJson = utils.getWeightsResponse(weights);
-              } else {
-                //send a regular 'multiple results' response
+              //Are there muliple names?
+              let names = mb.getproductnames(output); 
+              if (names.length > 1){
                 responseJson = utils.getMultipleResultsResponse(output);
+              } else {
+                //Are there muliple weigths?
+                let weights = mb.getweights(output); 
+                if (weights.length > 1){
+                  responseJson = utils.getWeightsResponse(weights);
+                } else {
+                  //send a regular 'multiple results' response
+                  //TODO: What is left to determine product differences here
+                  responseJson = utils.getMultipleResultsResponse(output);
+                }
               }
             }
           } else if (output.data.length === 1){

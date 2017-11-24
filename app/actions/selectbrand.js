@@ -14,13 +14,19 @@ class SelectBrandAction{
                 let responseJson = '';
                 if(typeof output.data !== 'undefined' && output.data !== null){
                   if(output.data.length > 1){
-                    //Are there multiple weigths?
-                    let weights = mb.getweights(output); 
-                    if (weights.length > 1){
-                        responseJson = utils.getWeightsResponse(weights);
-                    } else {
-                        //send a regular 'multiple results' response
+                    //Are there muliple names?
+                    let names = mb.getproductnames(output); 
+                    if (names.length > 1){
                         responseJson = utils.getMultipleResultsResponse(output);
+                    } else {
+                        //Are there multiple weigths?
+                        let weights = mb.getweights(output); 
+                        if (weights.length > 1){
+                            responseJson = utils.getWeightsResponse(weights);
+                        } else {
+                            //send a regular 'multiple results' response
+                            responseJson = utils.getMultipleResultsResponse(output);
+                        }
                     }
                   } else if (output.data.length === 1){
                         //add this product to the basket

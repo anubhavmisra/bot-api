@@ -52,6 +52,16 @@ function getweights(output) {
   }
 }
 
+function getproductnames(output) {
+  if(typeof output.data !== 'undefined' && output.data !== null){
+      let names = output.data.map(function(product, index, array){
+        return product.nm;
+      });
+      //remove duplicates
+      return uniq(names);
+  }
+}
+
 function uniq(a) {
   let seen = {};
   return a.filter(function(item) {
@@ -154,6 +164,7 @@ function isValidUser(extid){
 module.exports.callSearch = callSearch;
 module.exports.getbrands = getbrands;
 module.exports.getweights = getweights;
+module.exports.getproductnames = getproductnames
 module.exports.order = order;
 module.exports.getbasket = getbasket;
 module.exports.getBasketItemNames = getBasketItemNames;

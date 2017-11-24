@@ -10,13 +10,25 @@ class SelectMultipleAction{
       let product = utils.getparameter(req, "product");
       let brand = utils.getparameter(req, "brand");
       let weight =  utils.getparameter(req, "weight");
+      let selectedproduct = utils.getparameter(req, "selectedProduct");
       
+      let query = product + " " + selectedproduct;
+
       // Call the search api
-      mb.callSearch(product, brand, weight).then((output) => {
+      mb.callSearch(query, brand, weight).then((output) => {
         let responseJson = '';
 
         if(typeof output.data !== 'undefined' && output.data !== null){
-          if (output.data.length === 1){
+          if(output.data.length > 1){
+            //Are there multiple weigths?
+            let weights = mb.getweights(output); 
+            if (weights.length > 1){
+                responseJson = utils.getWeightsResponse(weights);
+            } else {
+                //send a regular 'multiple results' response
+                responseJson = utils.getMultipleResultsResponse(output);
+            }
+          } else if (output.data.length === 1){
               //add this product to the basket
               let quantity = utils.getparameter(req, 'quantity');
               let extid = utils.getexternalid(req);
@@ -30,12 +42,12 @@ class SelectMultipleAction{
                 reject(error);
               });   
           } else {
-            //FIXME We do not like this case. The product should be found by the select
+            //FIXME this should be a 'no results'
             let response = `There are an unexpected number of results for ${product}.`;
             responseJson = stringify({ "speech": response, "displayText": response});
           }
         } else{
-          //FIXME We do not like this case. The product should be found by the select
+          //FIXME this should be a 'no results'
           let response = `There are an unexpected number of results for ${product}.`;
           responseJson = stringify({ "speech": response, "displayText": response});
         }
