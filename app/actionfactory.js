@@ -6,6 +6,7 @@ let showmoreweights = require('./actions/showmoreweights');
 let selectweight = require('./actions/selectweight');
 let showmorebrands = require('./actions/showmorebrands');
 let selectbrand = require('./actions/selectbrand');
+let generateOtp = require('./actions/generateOtp');
 
 let actionFactory = {
   'search': new search(),
@@ -15,7 +16,8 @@ let actionFactory = {
   'showmoreweights': new showmoreweights(),
   'selectweight': new selectweight(),
   'showmorebrands': new showmorebrands(),
-  'selectbrand': new selectbrand()
+  'selectbrand': new selectbrand(),
+  'generateOtp': new generateOtp()
 };
 
 module.exports = actionFactory;

@@ -161,12 +161,69 @@ function isValidUser(extid){
   });
 }
 
+//Retrieve basket for user
+function getOTP(facebookId, mobile){
+  return new Promise((resolve, reject) => {
+    queryobject = querystring.stringify({facebookId: facebookId, mobile: mobile});
+    var options =  {
+        uri: MB_API_URL + '/backend/v1/ConversationApi/generateOtp?' + queryobject,
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+    request(options, function (error, response) {
+      if (!error && response.statusCode == 200) {
+        resolve(JSON.parse(response.body));
+      } else {
+        if(typeof response !== 'undefined'){
+          if(response.statusCode === 404){
+            resolve(false);
+          } else {
+            console.log(" Status code :" + response.statusCode);
+            console.log(" response :" + response.body);
+          }
+        }
+        reject(error);
+      }
+    });
+  });
+}
+
+//Retrieve basket for user
+function verifyOTP(facebookId, mobile, otp){
+  return new Promise((resolve, reject) => {
+    queryobject = querystring.stringify({facebookId: facebookId, mobile: mobile, otp: otp});
+    var options =  {
+        uri: MB_API_URL + '/backend/v1/ConversationApi/verifyOtpLogin?' + queryobject,
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+    request(options, function (error, response) {
+      if (!error && response.statusCode == 200) {
+        resolve(JSON.parse(response.body));
+      } else {
+        console.log("Call to MB api failed: " + error);
+        if(typeof response !== 'undefined'){
+          console.log(" Status code :" + response.statusCode);
+          console.log(" response :" + response.body);
+        }
+        reject(error);
+      }
+    });
+  });
+}
+
+
 module.exports.callSearch = callSearch;
 module.exports.getbrands = getbrands;
 module.exports.getweights = getweights;
-module.exports.getproductnames = getproductnames
+module.exports.getproductnames = getproductnames;
 module.exports.order = order;
 module.exports.getbasket = getbasket;
 module.exports.getBasketItemNames = getBasketItemNames;
 module.exports.isValidUser = isValidUser;
-
+module.exports.getOTP = getOTP;
+module.exports.verifyOTP = verifyOTP;

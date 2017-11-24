@@ -9,6 +9,8 @@ const MULTIPLE_PRODUCTS = 'OrderIntent-MultipleProducts';
 const SELECT_MULTIPRODUCT = ORDER_INTENT + '.'+ MULTIPLE_PRODUCTS + '.OrderIntent-MultipleProducts-select';
 const SHOW_MORE_MULTIPRODUCT = ORDER_INTENT + '.'+ MULTIPLE_PRODUCTS + '.OrderIntent-MultipleProducts-more';
 const GET_BASKET = 'basket.get';
+const NEW_USER = 'NewUserIntent'
+const MOBILE_NUMBER = NEW_USER + '.NewUserIntent-mobilenumber';
 
 //Maps actions from dialogFlow to the correct action js
 function resolveAction(req){
@@ -30,6 +32,8 @@ function resolveAction(req){
       return 'showmorebrands';
     } else if(actionName === SELECT_BRAND){
       return 'selectbrand';
+    } else if(actionName === MOBILE_NUMBER){
+      return 'generateOtp';
     } else {
       //Default action is searching for product
       return 'search';
