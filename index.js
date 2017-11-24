@@ -27,9 +27,11 @@ app.post('/api/order', function(req, res) {
     let extid = utils.getexternalid(req); 
     mb.isValidUser(extid).then((isValidUser) => {
       if(!isValidUser){
-        let response = "It seems like you have not regisered your facebook account yet. Please go to " + 
-        "http://www.milkbasket.com/facebook and register your account." ;
-        responseJson = JSON.stringify({ "speech": response, "displayText": response});
+        let response = "You have not regisered your facebook account yet. Please enter your " +
+          "registered mobile number" ;
+        responseJson = JSON.stringify({ "speech": response, "displayText": response, "followupEvent": {
+          "name": "enter_phone_number"}
+        });
         res.setHeader('Content-Type', 'application/json');
         res.send(responseJson);
       } else {
