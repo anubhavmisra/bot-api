@@ -9,7 +9,13 @@ class SelectWeightAction{
             let selectedWeight =  utils.getparameter(req, 'selectedWeight');
             let product = utils.getparameter(req, 'product');
             let brand = utils.getparameter(req, 'brand');
-            
+
+            //Add additional query, if it is present
+            let selectedproduct = utils.getparameter(req, "selectedProduct");
+            if(typeof selectedproduct !== 'undefined' && selectedproduct !== ""){
+                product = product + " " + selectedproduct;            
+            }
+
             //call MB search with product, brand, weight
             mb.callSearch(product, brand, selectedWeight).then((output) => {
                 let responseJson = '';
