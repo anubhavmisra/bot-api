@@ -2,7 +2,7 @@
 let request = require('request');
 let querystring = require('querystring');
 
-let MB_API_URL = "http://dev.milkbasket.com";
+let MB_API_URL = process.env.MB_HOSTNAME || "http://dev.milkbasket.com";
 
 //Call the search with query, brand, weight
 function callSearch(query, brand, weight){
