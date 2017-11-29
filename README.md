@@ -22,7 +22,7 @@ npm install
 ```shell
 npm start
 ```
-* Import bot in DialogFlow
-* Set endpoint for fullfillment in bot
-* Connect to facebook 
+* Import the zipfile containing the bot settings in DialogFlow
+* Set endpoint for fullfillment in DialogFlow to \_hostname\_/api/order
+* Connect the DialogFlow bot to facebook as described in https://dialogflow.com/docs/integrations/facebook
 
