@@ -9,7 +9,7 @@ const MULTIPLE_PRODUCTS = 'OrderIntent-MultipleProducts';
 const SELECT_MULTIPRODUCT = ORDER_INTENT + '.'+ MULTIPLE_PRODUCTS + '.OrderIntent-MultipleProducts-select';
 const SHOW_MORE_MULTIPRODUCT = ORDER_INTENT + '.'+ MULTIPLE_PRODUCTS + '.OrderIntent-MultipleProducts-more';
 const GET_BASKET = 'basket.get';
-const NEW_USER = 'NewUserIntent'
+const NEW_USER = 'NewUserIntent';
 const MOBILE_NUMBER = NEW_USER + '.NewUserIntent-mobilenumber';
 const OTP = MOBILE_NUMBER + '.NewUser-mobilenumber-found.NewUser-mobilenumber-found-otp';
 
