@@ -31,33 +31,6 @@ describe('search', function () {
       done(error);
     });
   });
-  it('should return a single search item', function (done) {
-    var request = {
-      "body": {
-        "result": {
-          "parameters": { "product": "Harvest Gold 100% Atta Bread" }
-        }
-      }
-    };
-    var expectedResponse = {
-      "speech": "I have added 'Harvest Gold 100% Atta Bread' to your basket(Not really).",
-      "displayText": "I have added 'Harvest Gold 100% Atta Bread' to your basket(Not really)."
-    };
-
-
-    action.op(request, expectedResponse).then((responseJson) => {
-      var response = JSON.parse(responseJson);
-      should.exist(response);
-      should(response).has.property('speech');
-      should(response).has.property('displayText');
-      should(expectedResponse.speech).equal(response.speech);
-      should(expectedResponse.displayText).equal(response.displayText);
-      done();
-    }).catch((error) => {
-      //Test should fail
-      done(error);
-    });
-  });
   it('should return multiple search items', function (done) {
     var request = {
       "body": {
